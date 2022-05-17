@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const propertyController = require('../Controller/property');
 
+var cors = require('cors')
+router.use(cors())
+
 router.get('/allproperty',propertyController.getAll)
 
 router.get('/propertyByCity/:city',propertyController.getByCity)

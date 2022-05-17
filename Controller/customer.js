@@ -1,7 +1,9 @@
 const client = require('../config/connection.js')
 const express = require('express');
 
-//const app = express();
+// const app = express();
+// var cors = require('cors')
+// app.use(cors())
 
 exports.getAll=async(req,res,next)=>{
     client.query(`Select * from customer`, (err, result) => {
