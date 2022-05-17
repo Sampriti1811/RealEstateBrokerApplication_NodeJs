@@ -52,8 +52,7 @@ exports.addProperty=async(req,res,next)=>{
     client.end;
 }
 
-
-app.put('/updateproperty/:id', (req, res) => {
+exports.updateProperty=async(req,res,next)=>{
     let property = req.body;
     let updateQuery = `update property
                        set city = '${property.city}',
@@ -70,7 +69,26 @@ app.put('/updateproperty/:id', (req, res) => {
         else { console.log(err.message) }
     })
     client.end;
-})
+}
+
+// app.put('/updateproperty/:id', (req, res) => {
+//     let property = req.body;
+//     let updateQuery = `update property
+//                        set city = '${property.city}',
+//                        offer_type = '${property.offer_type}',
+//                        price = '${property.price}',
+//                        prop_id = '${property.prop_id}',
+//                        prop_type = '${property.prop_type}'
+//                        where id = ${property.id}`
+
+//     client.query(updateQuery, (err, result) => {
+//         if (!err) {
+//             res.send('Update was successful')
+//         }
+//         else { console.log(err.message) }
+//     })
+//     client.end;
+// })
 
 exports.deleteProperty=async(req,res,next)=>{
     let insertQuery = `delete from property where id=${req.params.id}`;
