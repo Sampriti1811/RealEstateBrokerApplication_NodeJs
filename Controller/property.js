@@ -37,7 +37,7 @@ exports.getByType=async(req,res,next)=>{
     client.end; 
 }
 
-app.post("/insertproperty", (req, res) => {
+exports.addProperty=async(req,res,next)=>{
     const property = req.body;
     let insertQuery = `insert into property(city, offer_type, price, prop_id, prop_type) 
     values('${property.city}', '${property.offer_type}', '${property.price}','${property.prop_id}', '${property.prop_type}')`;
@@ -50,7 +50,8 @@ app.post("/insertproperty", (req, res) => {
         }
     });
     client.end;
-});
+}
+
 
 app.put('/updateproperty/:id', (req, res) => {
     let property = req.body;
@@ -71,7 +72,7 @@ app.put('/updateproperty/:id', (req, res) => {
     client.end;
 })
 
-app.delete("/deleteproperty/:id", (req, res) => {
+exports.deleteProperty=async(req,res,next)=>{
     let insertQuery = `delete from property where id=${req.params.id}`;
 
     client.query(insertQuery, (err, result) => {
@@ -82,4 +83,5 @@ app.delete("/deleteproperty/:id", (req, res) => {
         }
     });
     client.end;
-});
+}
+
