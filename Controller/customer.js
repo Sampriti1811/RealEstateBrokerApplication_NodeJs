@@ -31,8 +31,6 @@ exports.addCustomer = async (req, res, next) => {
             client.end;
         }
     })
-
-
 }
 
 exports.customerLogin = async (req, res, next) => {
