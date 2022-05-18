@@ -4,7 +4,7 @@ const express = require("express");
 const app = express();
 client.connect();
 
-exports.getAll=async(req,res,next)=> {
+exports.getAll = async (req, res, next) => {
     client.query(`Select * from property`, (err, result) => {
         if (!err) {
             res.send(result.rows);
@@ -13,10 +13,8 @@ exports.getAll=async(req,res,next)=> {
     client.end;
 }
 
-exports.getByCity=async(req,res,next)=>{
-    client.query(
-        `Select * from property where city='${req.params.city}'`,
-        (err, result) => {
+exports.getByCity = async (req, res, next) => {
+    client.query(`Select * from property where city='${req.params.city}'`,(err, result) => {
             if (!err) {
                 res.send(result.rows);
             }
@@ -25,19 +23,17 @@ exports.getByCity=async(req,res,next)=>{
     client.end;
 }
 
-exports.getByType=async(req,res,next)=>{
-    client.query(
-        `Select * from property where prop_type='${req.params.prop_type}'`,
-        (err, result) => {
+exports.getByType = async (req, res, next) => {
+    client.query(`Select * from property where prop_type='${req.params.prop_type}'`,(err, result) => {
             if (!err) {
                 res.send(result.rows);
             }
         }
     );
-    client.end; 
+    client.end;
 }
 
-exports.addProperty=async(req,res,next)=>{
+exports.addProperty = async (req, res, next) => {
     const property = req.body;
     let insertQuery = `insert into property(city, offer_type, price, prop_id, prop_type) 
     values('${property.city}', '${property.offer_type}', '${property.price}','${property.prop_id}', '${property.prop_type}')`;
@@ -52,7 +48,7 @@ exports.addProperty=async(req,res,next)=>{
     client.end;
 }
 
-exports.updateProperty=async(req,res,next)=>{
+exports.updateProperty = async (req, res, next) => {
     let property = req.body;
     let updateQuery = `update property
                        set city = '${property.city}',
@@ -90,7 +86,7 @@ exports.updateProperty=async(req,res,next)=>{
 //     client.end;
 // })
 
-exports.deleteProperty=async(req,res,next)=>{
+exports.deleteProperty = async (req, res, next) => {
     let insertQuery = `delete from property where id=${req.params.id}`;
 
     client.query(insertQuery, (err, result) => {

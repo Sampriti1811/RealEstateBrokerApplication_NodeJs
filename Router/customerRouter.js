@@ -10,4 +10,6 @@ router.get('/allcustomer',custController.getAll);
 
 router.post('/addcustomer',custController.addCustomer);
 
+router.post('/login',custController.customerLogin);
+
 module.exports = router;
