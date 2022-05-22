@@ -12,4 +12,6 @@ router.post('/addcustomer',custController.addCustomer);
 
 router.post('/login',custController.customerLogin);
 
+router.post('/deal/:id',custController.deal);
+
 module.exports = router;

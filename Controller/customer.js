@@ -1,6 +1,8 @@
 const client = require('../config/connection.js')
 const express = require('express');
 
+cid=0;
+
 exports.getAll = async (req, res, next) => {
     client.query(`Select * from customer`, (err, result) => {
         if (!err) {
@@ -38,13 +40,35 @@ exports.customerLogin = async (req, res, next) => {
     let user
     client.query(`select * from customer where cust_name ='${customer.cust_name}'`, (err, result) => {
         user = result;
+        //cid = result.rows[0].cust_id
+        //console.log(cid);
+
         if (result.rows.length == 0) {
-            return res.send({ "unp": true })
+            return res.send({"unp": true })
         }
+        //cid = result.rows[0].cust_id
         let pass = user.rows[0].cust_password;
         if (pass === customer.cust_password) {
-            return res.send({ "auth": true })
+            cid = result.rows[0].cust_id
+            console.log(cid);
+            return res.send({"auth": true })  
         }
-        return res.send({ "auth": false })
+        return res.send({ "auth": false })   
+    });  
+    //cid = user.rows[0].id
+   //console.log(cid)
+}
+
+exports.deal = async(req,res,next) =>{
+    console.log(cid)
+    let i = req.params.id;
+    console.log(i);
+    client.query(`select * from property where id ='${i}'`,(err,result) => {
+    console.log(result.rows[0]);
+
+    client.query( `insert into deal( cust_id,city,price,prop_id,prop_type) 
+    values('${cid}', '${result.rows[0].city}', '${result.rows[0].price}','${result.rows[0].prop_id}', '${result.rows[0].prop_type}')`);
+
     });
+    
 }

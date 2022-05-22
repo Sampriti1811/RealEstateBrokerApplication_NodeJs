@@ -51,3 +51,19 @@ exports.addBroker=async=(req,res,next)=>{
 //     })
 //     client.end;
 // })
+
+exports.brLogin = async (req,res,next ) => {
+    const broker = req.body;
+    let br
+    client.query(`select * from broker where br_username = '${broker.br_username}'`,(err,result) => {
+        br = result;
+        if(result.rows.length == 0){
+            return res.send({"bnp":true})
+        }
+        let brpass = br.rows[0].br_password;
+        if(brpass === broker.br_password){
+            return res.send({"auth":true})
+        }
+        return res.send({"auth":false})
+    });
+} 

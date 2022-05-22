@@ -8,5 +8,6 @@ router.use(cors())
 
 router.get('/allbroker',broController.getAllBrokers);
 router.post('/addbroker',broController.addBroker);
+router.post('/brlogin',broController.brLogin);
 
 module.exports = router;
